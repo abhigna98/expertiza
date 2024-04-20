@@ -16,7 +16,7 @@ class TeamsParticipantsController < ApplicationController
     render inline: "<%= auto_complete_result @users, 'name' %>", layout: false
   end
 
-  # Example of duties: manager, designer, programmer, tester. Finds TeamsUser and save preferred Duty
+  # Example of duties: manager, designer, programmer, tester. Finds TeamsParticipants and save preferred Duty
   def update_duties
     team_user = TeamsParticipant.find(params[:teams_participant_id])
     team_user.update_attribute(:duty_id, params[:teams_participant]['duty_id'])
