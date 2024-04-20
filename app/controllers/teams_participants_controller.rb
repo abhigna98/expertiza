@@ -18,8 +18,8 @@ class TeamsParticipantsController < ApplicationController
 
   # Example of duties: manager, designer, programmer, tester. Finds TeamsUser and save preferred Duty
   def update_duties
-    team_user = TeamsParticipant.find(params[:teams_user_id])
-    team_user.update_attribute(:duty_id, params[:teams_user]['duty_id'])
+    team_user = TeamsParticipant.find(params[:teams_participant_id])
+    team_user.update_attribute(:duty_id, params[:teams_participant]['duty_id'])
     redirect_to controller: 'student_teams', action: 'view', student_id: params[:participant_id]
   end
 

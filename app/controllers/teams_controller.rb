@@ -125,7 +125,7 @@ class TeamsController < ApplicationController
     @team = Team.find_by(id: params[:id])
     unless @team.nil?
       @signed_up_team = SignedUpTeam.where(team_id: @team.id)
-      @teams_users = TeamsUser.where(team_id: @team.id)
+      @teams_users = TeamsParticipant.where(team_id: @team.id)
 
       if @signed_up_team == 1 && !@signUps.first.is_waitlisted # if a topic is assigned to this team
         # if there is another team in waitlist, assign this topic to the new team

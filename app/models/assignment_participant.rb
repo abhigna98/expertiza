@@ -177,7 +177,7 @@ class AssignmentParticipant < Participant
     end
 
     response_map = ResponseMap.find(response_map_id)
-    first_user_id = TeamsUser.find_by(team_id: response_map.reviewee_id).user_id
+    first_user_id = TeamsParticipant.find_by(team_id: response_map.reviewee_id).user_id
     participant = Participant.find_by(parent_id: response_map.reviewed_object_id, user_id: first_user_id)
     return if participant.nil?
 

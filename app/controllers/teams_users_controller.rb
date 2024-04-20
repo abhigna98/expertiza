@@ -18,15 +18,15 @@ class TeamsUsersController < ApplicationController
 
   # Example of duties: manager, designer, programmer, tester. Finds TeamsUser and save preferred Duty
   def update_duties
-    team_user = TeamsUser.find(params[:teams_user_id])
-    team_user.update_attribute(:duty_id, params[:teams_user]['duty_id'])
+    team_user = TeamsParticipant.find(params[:teams_participant_id])
+    team_user.update_attribute(:duty_id, params[:teams_participant]['duty_id'])
     redirect_to controller: 'student_teams', action: 'view', student_id: params[:participant_id]
   end
 
   def list
     @team = Team.find(params[:id])
     @assignment = Assignment.find(@team.parent_id)
-    @teams_users = TeamsUser.page(params[:page]).per_page(10).where(['team_id = ?', params[:id]])
+    @teams_users = TeamsParticipant.page(params[:page]).per_page(10).where(['team_id = ?', params[:id]])
   end
 
   def new
@@ -93,7 +93,7 @@ class TeamsUsersController < ApplicationController
   end
 
   def delete
-    @teams_user = TeamsUser.find(params[:id])
+    @teams_user = TeamsParticipant.find(params[:id])
     parent_id = Team.find(@teams_user.team_id).parent_id
     @user = User.find(@teams_user.user_id)
     @teams_user.destroy
@@ -103,7 +103,7 @@ class TeamsUsersController < ApplicationController
 
   def delete_selected
     params[:item].each do |item_id|
-      team_user = TeamsUser.find(item_id).first
+      team_user = TeamsParticipant.find(item_id).first
       team_user.destroy
     end
 
